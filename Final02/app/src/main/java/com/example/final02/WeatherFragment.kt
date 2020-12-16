@@ -27,13 +27,53 @@ class WeatherFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        RequestNow()
-        RequestHour()
-        RequestSeven()
+        RequestNow("101010100")
+        RequestHour("101010100")
+        RequestSeven("101010100")
+        Search1.setOnClickListener {
+            getLocation()
+        }
         //imageView.setImageResource(R.drawable.a150)
     }
 
-    fun RequestNow(){
+    fun getLocation(){
+        val search = searchInput1.getText().toString()
+        Thread {
+            val retrofit = Retrofit.Builder().baseUrl("https://geoapi.qweather.com/v2/city/")
+                .addConverterFactory(
+                    GsonConverterFactory.create()
+                ).build()
+            Log.i("net", "succe")
+            val location = retrofit.create(Location::class.java)
+            Log.i("net", "succe")
+            location.getMessageByGet("761d26e1d71e48f285f3fefb689b61a4", search)
+                .enqueue(object : Callback<location_s> {
+                    override fun onResponse(
+                        call: Call<location_s>,
+                        response: Response<location_s>
+                    ) {
+                        Log.i("Retrofit", response.toString())
+                        val msg = response.body()
+                        if (msg != null) {
+                            val weatherHourList= ArrayList<location_s>()
+                            val loca = msg.location[0].id
+                            getActivity()?.runOnUiThread {
+                                //responseText.text = msg.toString()
+                                RequestNow(loca)
+                                RequestHour(loca)
+                                RequestSeven(loca)
+                            }
+                        }
+                    }
+
+                    override fun onFailure(call: Call<location_s>, t: Throwable) {
+                        t.printStackTrace()
+                    }
+                })
+        }.start()
+    }
+
+    fun RequestNow(location:String){
         Thread {
             //获取当天天气基本情况
             val retrofit = Retrofit.Builder().baseUrl("https://devapi.qweather.com/v7/weather/")
@@ -43,7 +83,35 @@ class WeatherFragment : Fragment() {
             Log.i("net", "succe")
             val weatherService = retrofit.create(WeatherService::class.java)
             Log.i("net", "succe")
-            weatherService.getMessageByGet("761d26e1d71e48f285f3fefb689b61a4", "101010100")
+            val retrofit2 = Retrofit.Builder().baseUrl("https://geoapi.qweather.com/v2/city/")
+                .addConverterFactory(
+                    GsonConverterFactory.create()
+                ).build()
+            Log.i("net", "succe")
+            val location2 = retrofit2.create(Location::class.java)
+            Log.i("net", "succe")
+            location2.getMessageByGet("761d26e1d71e48f285f3fefb689b61a4", location)
+                .enqueue(object : Callback<location_s> {
+                    override fun onResponse(
+                        call: Call<location_s>,
+                        response: Response<location_s>
+                    ) {
+                        Log.i("Retrofit", response.toString())
+                        val msg = response.body()
+                        if (msg != null) {
+                            val weatherHourList= ArrayList<location_s>()
+                            val loca = msg.location[0].name
+                            getActivity()?.runOnUiThread {
+                                //responseText.text = msg.toString()
+                                location1.setText(loca)
+                            }
+                        }
+                    }
+                    override fun onFailure(call: Call<location_s>, t: Throwable) {
+                        t.printStackTrace()
+                    }
+                })
+            weatherService.getMessageByGet("761d26e1d71e48f285f3fefb689b61a4", location)
                 .enqueue(object : Callback<weather_now> {
                     override fun onResponse(
                         call: Call<weather_now>,
@@ -62,6 +130,7 @@ class WeatherFragment : Fragment() {
                                 nowhumidity.text = msg.now.humidity+"%"
                                 nowwindDir.text = msg.now.windDir
                                 nowwindScale.text = msg.now.windScale+"级"
+
                             }
                         }
                     }
@@ -79,7 +148,7 @@ class WeatherFragment : Fragment() {
             Log.i("net", "succe")
             val airNow = retrofit1.create(AirNow::class.java)
             Log.i("net", "succe")
-            airNow.getMessageByGet("761d26e1d71e48f285f3fefb689b61a4", "101010100")
+            airNow.getMessageByGet("761d26e1d71e48f285f3fefb689b61a4", location)
                 .enqueue(object : Callback<air> {
                     override fun onResponse(
                         call: Call<air>,
@@ -103,7 +172,7 @@ class WeatherFragment : Fragment() {
         }.start()
     }
 
-    fun RequestHour(){
+    fun RequestHour(location:String){
         //获取逐小时
         Thread {
             val retrofit = Retrofit.Builder().baseUrl("https://devapi.qweather.com/v7/weather/")
@@ -113,7 +182,7 @@ class WeatherFragment : Fragment() {
             Log.i("net", "succe")
             val weatherHour = retrofit.create(WeatherHour::class.java)
             Log.i("net", "succe")
-            weatherHour.getMessageByGet("761d26e1d71e48f285f3fefb689b61a4", "101010100")
+            weatherHour.getMessageByGet("761d26e1d71e48f285f3fefb689b61a4", location)
                 .enqueue(object : Callback<weather_per_hour> {
                     override fun onResponse(
                         call: Call<weather_per_hour>,
@@ -146,7 +215,7 @@ class WeatherFragment : Fragment() {
         }.start()
     }
 
-    fun RequestSeven(){
+    fun RequestSeven(location:String){
         Thread {
             val retrofit = Retrofit.Builder().baseUrl("https://devapi.qweather.com/v7/weather/")
                 .addConverterFactory(
@@ -155,7 +224,7 @@ class WeatherFragment : Fragment() {
             Log.i("net", "succe")
             val weatherSeven = retrofit.create(WeatherSeven::class.java)
             Log.i("net", "succe")
-            weatherSeven.getMessageByGet("761d26e1d71e48f285f3fefb689b61a4", "101010100")
+            weatherSeven.getMessageByGet("761d26e1d71e48f285f3fefb689b61a4", location)
                 .enqueue(object : Callback<weather_seven> {
                     override fun onResponse(
                         call: Call<weather_seven>,

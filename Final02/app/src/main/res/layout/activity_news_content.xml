@@ -1,50 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/childHeader"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:fitsSystemWindows="true">
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/coll_too_bar"
-            android:fitsSystemWindows="true"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:theme="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+        android:layout_height="40dp"
+        android:gravity="left"
+        android:background="@drawable/childheader01">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar_top"
-                android:theme="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:popupTheme="@style/Base.ThemeOverlay.AppCompat.Light"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin" />
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.core.widget.NestedScrollView
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/backButton"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/backnewshost01"
+            android:onClick="backClick"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/contentLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-        <androidx.cardview.widget.CardView
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/childHeader" >
+
+        <TextView
+            android:id="@+id/newsContentTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:ignore="WebViewLayout"
-            app:cardCornerRadius="6dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp">
-            <WebView
-                android:id="@+id/web_view"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-        </androidx.cardview.widget.CardView>
-    </androidx.core.widget.NestedScrollView>
+            android:gravity="center"
+            android:padding="10dp"
+            android:textSize="20sp" />
+        <TextView
+            android:id="@+id/newsContentDateAuthor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dp"
+            android:textSize="10sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/newsContentPtagRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
