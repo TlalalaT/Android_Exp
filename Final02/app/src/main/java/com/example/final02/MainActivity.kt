@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity(),BottomNavigationBar.OnTabSelectedListen
         /** 添加导航按钮  */
         bottomNavigationBar!!
             .addItem(BottomNavigationItem(R.drawable.news_top, "新闻"))
+            .addItem(BottomNavigationItem(R.drawable.movie, "电影"))
             .addItem(BottomNavigationItem(R.drawable.weather_top, "天气"))
             .addItem(BottomNavigationItem(R.drawable.mine_top, "我的"))
             .setFirstSelectedPosition(lastSelectedPosition)
@@ -73,12 +74,21 @@ class MainActivity : AppCompatActivity(),BottomNavigationBar.OnTabSelectedListen
                 if (mWeatherFragment == null) {
                     val fragmentManager = supportFragmentManager
                     val transaction = fragmentManager.beginTransaction()
-                    transaction.replace(R.id.tabs, WeatherFragment())
+                    transaction.replace(R.id.tabs, MovieFragment())
                     transaction.commit()
                 }
                 //transaction.replace(R.id.tb, mScanFragment)
             }
             2 -> {
+                if (mWeatherFragment == null) {
+                    val fragmentManager = supportFragmentManager
+                    val transaction = fragmentManager.beginTransaction()
+                    transaction.replace(R.id.tabs, WeatherFragment())
+                    transaction.commit()
+                }
+                //transaction.replace(R.id.tb, mScanFragment)
+            }
+            3 -> {
                 if (mMineFragment == null) {
                     val fragmentManager = supportFragmentManager
                     val transaction = fragmentManager.beginTransaction()

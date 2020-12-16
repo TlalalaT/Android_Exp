@@ -18,11 +18,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Final02"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Mine" ></activity>
-        <activity android:name=".NewsContentActivity"></activity>
+        <activity android:name=".MovieContentActivity"></activity>
+        <activity android:name=".Mine" />
+        <activity android:name=".NewsContentActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

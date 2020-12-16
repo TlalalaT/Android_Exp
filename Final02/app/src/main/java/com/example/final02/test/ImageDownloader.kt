@@ -13,10 +13,6 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 
-
-/**
- * Created by huhx on 2016/4/12.
- */
 var imageDownloader = ImageDownloader()
 
 class ImageDownloader {
