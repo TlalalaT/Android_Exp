@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@drawable/weatherback">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/retiTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:text="更新时间："
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/refreshTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/retiTag"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon" />
+
+            <TextView
+                android:id="@+id/nowtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="-30dp"
+                android:text="晴"
+                android:textColor="#000000"
+                android:textSize="50sp" />
+
+            <TextView
+                android:id="@+id/nowtemp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nowtext"
+                android:layout_centerInParent="true"
+                android:text="21℃"
+                android:textColor="#000000"
+                android:textSize="70sp" />
+
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nowtemp"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="10dp"
+                android:text="北京"
+                android:textColor="#000000"
+                android:textSize="30sp" />
+
+            <LinearLayout
+                android:id="@+id/kognqizhiliang"
+                android:layout_width="90dp"
+                android:layout_height="100dp"
+                android:layout_below="@+id/location"
+                android:layout_marginLeft="10dp"
+                android:background="#50FFFFFF"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="12dp"
+                    android:text="空气质量"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/nowaqi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/nowcategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/fengxiang"
+                android:layout_width="90dp"
+                android:layout_height="100dp"
+                android:layout_below="@+id/location"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/kognqizhiliang"
+                android:background="#50FFFFFF"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:text="风向"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/nowwindDir"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="15dp"
+                    android:textSize="22sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/fengli"
+                android:layout_width="90dp"
+                android:layout_height="100dp"
+                android:layout_below="@+id/location"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/fengxiang"
+                android:background="#50FFFFFF"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:text="风力"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/nowwindScale"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="15dp"
+                    android:textSize="22sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/shidu"
+                android:layout_width="90dp"
+                android:layout_height="100dp"
+                android:layout_below="@+id/location"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/fengli"
+                android:background="#50FFFFFF"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:text="湿度"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/nowhumidity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="15dp"
+                    android:textSize="22sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/zhuxiaoshi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="逐小时天气情况"
+                android:layout_marginLeft="5dp"
+                android:layout_below="@+id/kognqizhiliang"
+                android:textColor="#000000"
+                android:textSize="25sp"
+                android:layout_marginTop="20dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="#50FFFFFF"
+                android:id="@+id/weatherhour"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/zhuxiaoshi"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/qitian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="未来7天天气情况"
+                android:layout_marginLeft="5dp"
+                android:layout_below="@+id/weatherhour"
+                android:textColor="#000000"
+                android:textSize="25sp"
+                android:layout_marginTop="20dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="#50FFFFFF"
+                android:id="@+id/weatherseven"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/qitian"
+                android:layout_height="match_parent" />
+
+
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

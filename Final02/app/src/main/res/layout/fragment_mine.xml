@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/person_infro"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:background="@drawable/mine_person01"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/personName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="60dp"
+            android:text="安室奈美月月子"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            />
+
+        <TextView
+            android:id="@+id/personId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="8dp"
+            android:text="ID: 123456789"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+
+</RelativeLayout>
