@@ -22,9 +22,9 @@ class MovieAdapter(val movieList: List<movie_show>) : RecyclerView.Adapter<Movie
             //val movies = movieList[holder.adapterPosition]
             val movies = movieList[holder.adapterPosition]
             Log.d("TTTTT",movies.id)
-            MovieContentActivity.actionStart(parent.context, movies.id)
+            MovieContentActivity.actionStart(parent.context, movies.id,movies.name,movies.imageUrl)
         }
-        return ViewHolder(view)
+        return holder
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

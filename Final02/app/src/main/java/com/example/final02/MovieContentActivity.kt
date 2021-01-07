@@ -22,9 +22,11 @@ import kotlin.concurrent.thread
 class MovieContentActivity : AppCompatActivity() {
 
     companion object{
-        fun actionStart(context: Context, id:String){
-            val intent = Intent(context, NewsContentActivity::class.java).apply {
+        fun actionStart(context: Context, id:String, name:String, pic:String){
+            val intent = Intent(context, MovieContentActivity::class.java).apply {
                 putExtra("movie_id", id)
+                putExtra("movie_name", name)
+                putExtra("movie_pic", pic)
             }
             context.startActivity(intent)
         }
@@ -47,12 +49,18 @@ class MovieContentActivity : AppCompatActivity() {
 
          */
         val movieId = intent.getStringExtra("movie_id")
+        val movieName = intent.getStringExtra("movie_name")
+        val moviePic = intent.getStringExtra("movie_pic")
         if (movieId != null) {
-            getMovieContent(movieId)
+            if (movieName != null) {
+                if (moviePic != null) {
+                    getMovieContent(movieId,movieName,moviePic)
+                }
+            }
         }
     }
 
-    fun getMovieContent(id: String){
+    fun getMovieContent(id: String, name: String, pic: String){
         thread {
             var connection: HttpURLConnection?=null
             try {
@@ -74,7 +82,9 @@ class MovieContentActivity : AppCompatActivity() {
                 val jsonStr = obj.getString("result")
                 Log.d("moviecon",jsonStr)
                 val gson = Gson()
-                val movieCon = gson.fromJson(jsonStr,MovieContent::class.java)
+                var movieCon = gson.fromJson(jsonStr,MovieContent::class.java)
+                movieCon.title = name
+                movieCon.poster = pic
                 //val newsTest = gson.fromJson(jsonTest,News::class.java)
                 showUIchange(movieCon)
 
@@ -88,10 +98,15 @@ class MovieContentActivity : AppCompatActivity() {
     private fun showUIchange(movieCon: MovieContent){
         runOnUiThread {
             //imageDownloader.showImage(datas[i].thumbnail_pic_s,viewHolder3.img1)
+            if (movieCon.poster == null){
+                return@runOnUiThread
+            }
             imageDownloader.showImage(movieCon.poster,movie_poster)
             movie_title.text = movieCon.title
             movie_info.text = "年代：" + movieCon.year + "\n地区：" + movieCon.film_locations + "\n类型：" + movieCon.genres + "\n评分：" + movieCon.rating
             simple_content.text = movieCon.plot_simple
+            directors.text = movieCon.directors
+            actors.text = movieCon.actors
         }
     }
     fun backClick(view: View){
