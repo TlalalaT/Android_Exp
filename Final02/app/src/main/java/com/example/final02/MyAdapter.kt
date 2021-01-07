@@ -51,6 +51,7 @@ internal class MyAdapter(context: Context, datas: List<News>) : BaseAdapter() {
                 viewHolder3.img1 = view.findViewById(R.id.img1)
                 viewHolder3.img2 = view.findViewById(R.id.img2)
                 viewHolder3.img3 = view.findViewById(R.id.img3)
+                viewHolder3.textView2 = view.findViewById(R.id.tv_ifo)
                 view.setTag(viewHolder3)
             } else {
                 viewHolder3 = view.getTag() as ViewHolder3
@@ -60,6 +61,7 @@ internal class MyAdapter(context: Context, datas: List<News>) : BaseAdapter() {
             imageDownloader.showImage(datas[i].thumbnail_pic_s,viewHolder3.img1)
             imageDownloader.showImage(datas[i].thumbnail_pic_s02,viewHolder3.img2)
             imageDownloader.showImage(datas[i].thumbnail_pic_s03,viewHolder3.img3)
+            viewHolder3.textView2?.text = datas[i].author_name + "\t\t" + datas[i].date
             //ImageLoader.getInstance().displayImage(datas[i].thumbnail_pic_s, viewHolder3.img1, options)
             //ImageLoader.getInstance().displayImage(datas[i].thumbnail_pic_s02, viewHolder3.img2, options)
             //ImageLoader.getInstance().displayImage(datas[i].thumbnail_pic_s03, viewHolder3.img3, options)
@@ -72,6 +74,7 @@ internal class MyAdapter(context: Context, datas: List<News>) : BaseAdapter() {
                 viewHolder2.textView = view.findViewById(R.id.tv_title)
                 viewHolder2.img1 = view.findViewById(R.id.img1)
                 viewHolder2.img2 = view.findViewById(R.id.img2)
+                viewHolder2.textView2 = view.findViewById(R.id.tv_ifo)
                 view.setTag(viewHolder2)
             } else {
                 viewHolder2 = view.getTag() as ViewHolder2
@@ -80,6 +83,7 @@ internal class MyAdapter(context: Context, datas: List<News>) : BaseAdapter() {
             //下载图片
             imageDownloader.showImage(datas[i].thumbnail_pic_s,viewHolder2.img1)
             imageDownloader.showImage(datas[i].thumbnail_pic_s02,viewHolder2.img2)
+            viewHolder2.textView2?.text = datas[i].author_name + "\t\t" + datas[i].date
             //ImageLoader.getInstance().displayImage(datas[i].thumbnail_pic_s, viewHolder2.img1, options)
             //ImageLoader.getInstance().displayImage(datas[i].thumbnail_pic_s02, viewHolder2.img2, options)
             return view
@@ -90,6 +94,7 @@ internal class MyAdapter(context: Context, datas: List<News>) : BaseAdapter() {
                 viewHolder1 = ViewHolder1()
                 viewHolder1.textView = view.findViewById(R.id.tv_title)
                 viewHolder1.img1 = view.findViewById(R.id.img1)
+                viewHolder1.textView2 = view.findViewById(R.id.tv_ifo)
                 view.setTag(viewHolder1)
             } else {
                 viewHolder1 = view.getTag() as ViewHolder1
@@ -97,6 +102,7 @@ internal class MyAdapter(context: Context, datas: List<News>) : BaseAdapter() {
             viewHolder1.textView?.text = datas[i].title
             //下载图片
             imageDownloader.showImage(datas[i].thumbnail_pic_s,viewHolder1.img1)
+            viewHolder1.textView2?.text = datas[i].author_name + "\t\t" + datas[i].date
             //ImageLoader.getInstance().displayImage(datas[i].thumbnail_pic_s, viewHolder1.img1, options)
             return view
         }
@@ -126,12 +132,14 @@ internal class MyAdapter(context: Context, datas: List<News>) : BaseAdapter() {
     internal inner class ViewHolder1 {
         var textView: TextView? = null
         var img1: ImageView? = null
+        var textView2: TextView? = null
     }
 
     internal inner class ViewHolder2 {
         var textView: TextView? = null
         var img1: ImageView? = null
         var img2: ImageView? = null
+        var textView2: TextView? = null
     }
 
     internal inner class ViewHolder3 {
@@ -139,6 +147,7 @@ internal class MyAdapter(context: Context, datas: List<News>) : BaseAdapter() {
         var img1: ImageView? = null
         var img2: ImageView? = null
         var img3: ImageView? = null
+        var textView2: TextView? = null
     }
 
     init {

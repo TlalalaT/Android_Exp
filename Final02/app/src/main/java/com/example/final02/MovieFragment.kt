@@ -1,6 +1,7 @@
 package com.example.final02
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,7 +37,7 @@ class MovieFragment : Fragment() {
                     GsonConverterFactory.create()
                 ).build()
             val Movie = retrofit.create(MovieGet::class.java)
-            Movie.getMessageByGet("fb28fa3a11d9cc66428a137deb7e9fb3", 2)
+            Movie.getMessageByGet("da0e99dd235cd6e11b57a678f5bb7798", 2)
                 .enqueue(object : Callback<movie> {
                     override fun onResponse(
                         call: Call<movie>,
@@ -45,10 +46,13 @@ class MovieFragment : Fragment() {
                         val msg = response.body()
                         if (msg != null) {
                             val movieList = ArrayList<movie_show>()
+
                             for (i in (0..(msg.result.size-1))) {
-                                val movieshow = movie_show(msg.result[i].movieName, msg.result[i].pic_url)
+                                val movieshow = movie_show(msg.result[i].movieId,msg.result[i].movieName, msg.result[i].pic_url)
+                                Log.d("TTTTT",msg.result[i].movieId)
                                 movieList.add(movieshow)
                             }
+                            Log.d("MOVIE",movieList.size.toString())
                             getActivity()?.runOnUiThread {
                                 //responseText.text = msg.toString()
                                 val layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)

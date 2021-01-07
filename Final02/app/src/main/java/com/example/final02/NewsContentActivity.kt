@@ -28,29 +28,42 @@ class NewsContentActivity : AppCompatActivity() {
     }
 
     fun getContent(url: String){
+
         thread {
             var document: Document? = null
             var ncptaglist = ArrayList<newsContentP>()
+            Log.d("co-url",url.toString())
             try {
                 document = Jsoup.connect(url).get()
-                val elements : Elements = document.getElementsByClass("J-contain_detail_cnt contain_detail_cnt")
+                Log.d("content",document.toString())
+                val elements : Elements = document.getElementsByClass("J-article-content article-content")
 
+                //J-article-content article-content
                 for (element in elements){
 
                     Log.d("TTTT",element.toString())
-                    val eimages = element.getElementsByClass("widt_ad")
-                    var pkongge = 1
+                    val eimages = element.getElementsByClass("section img")
+                    //section img
+                    //var pkongge = 1
                     var tmp = 0
                     for (et in element.getElementsByTag("p")){
                         val contentText = et.text()
                         ncptaglist.add(newsContentP(contentText,newsContentP.TYPE_TEXT))
+                        if (tmp < eimages.size){
+                            ncptaglist.add(newsContentP(eimages.get(tmp).getElementsByTag("a").attr("data-href"),newsContentP.TYPE_IMAG))
+                            tmp++
+                        }
+
+                        /*
                         if (contentText == "" && pkongge == 1){
-                            ncptaglist.add(newsContentP("https:" + eimages.get(tmp).getElementsByTag("img").attr("data-url"),newsContentP.TYPE_IMAG))
+                            ncptaglist.add(newsContentP("https:" + eimages.get(tmp).getElementsByTag("a").attr("data-href"),newsContentP.TYPE_IMAG))
                             tmp++
                             pkongge = 2
                         } else if (contentText == "" && pkongge == 2){
                             pkongge = 1
                         }
+
+                         */
                     }
                     //ncptaglist.add(newsContentP(element.getElementsByTag("p").text(),newsContentP.TYPE_TEXT))
                     //ncptaglist.add(newsContentP("https:" + element.select("div[class=widt_ad] img").get(tmp).attr("data-url"),newsContentP.TYPE_IMAG))

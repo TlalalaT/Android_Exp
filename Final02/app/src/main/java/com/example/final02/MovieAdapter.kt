@@ -1,5 +1,6 @@
 package com.example.final02
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,8 +19,10 @@ class MovieAdapter(val movieList: List<movie_show>) : RecyclerView.Adapter<Movie
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie,parent,false)
         val holder = ViewHolder(view)
         holder.itemView.setOnClickListener {
+            //val movies = movieList[holder.adapterPosition]
             val movies = movieList[holder.adapterPosition]
-            MovieContentActivity.actionStart(parent.context, movies.name)
+            Log.d("TTTTT",movies.id)
+            MovieContentActivity.actionStart(parent.context, movies.id)
         }
         return ViewHolder(view)
     }

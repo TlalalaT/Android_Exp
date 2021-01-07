@@ -121,7 +121,7 @@ class NewsFragment : Fragment() {
                     newslist1.add(newslist[i])
                 }
 
-                showUIchange(newslist1)
+                showUIchange(newslist)
             } catch (e: Exception){
                 e.printStackTrace()
             } finally {

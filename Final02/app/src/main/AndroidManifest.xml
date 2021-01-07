@@ -19,7 +19,7 @@
         android:theme="@style/Theme.Final02"
         android:usesCleartextTraffic="true">
         <activity android:name=".MovieContentActivity"></activity>
-        <activity android:name=".Mine" />
+
         <activity android:name=".NewsContentActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
